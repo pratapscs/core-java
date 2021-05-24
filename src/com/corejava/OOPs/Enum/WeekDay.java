@@ -1,0 +1,6 @@
+package com.corejava.OOPs.Enum;
+
+public enum WeekDay {
+	
+	   MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY;
+	}
