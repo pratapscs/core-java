@@ -10,7 +10,7 @@ public class DestroyTest
 				public void run() 
                   {
                         System.out.println(Thread.currentThread().getName()+" has started.");
-                        Thread.currentThread().destroy();
+                        Thread.currentThread();
                         System.out.println(Thread.currentThread().getName()+" has ENDED."); 
                   }
  

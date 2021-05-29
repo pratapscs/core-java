@@ -1,48 +1,53 @@
 package com.corejava.DataStructures.SortingTechniques;
 
-import java.util.Arrays;
+public class CountingSort {
 
-public class CountingSort 
-{
+    private static int TOTAL = 10;
 
-	private static int[] getOccurancesOfEachNumber(int[] numbers, int maxNumber) {
-		int[] occurances = new int[maxNumber + 1];
+    public void sort(int arr[]) {
 
-		for (int i = 0; i <= maxNumber; i++) {
-			occurances[i] = 0;
-		}
-		for (int i = 0; i < numbers.length; i++) {
-			occurances[numbers[i]] = occurances[numbers[i]] + 1;
-		}
-		return occurances;
-	}
+        int count[] = new int[TOTAL];
 
-	public static int[] CountSort(int[] numbers,
-			int maxNumber) {
+        for (int i = 0; i < arr.length; i++) {
+            count[arr[i]]++;
+        }
+        int c = 0;
+        for (int i = 0; i < TOTAL; i++) {
+            while (count[i] > 0) {
+                arr[c++] = i;
+                count[i]--;
+            }
+        }
+    }
 
-		int[] occurances = getOccurancesOfEachNumber(
-				numbers, maxNumber);
+    public void sort1(int arr[]) {
 
-		return fillOccurancesIntoSortedArray(occurances,
-				maxNumber, numbers.length);
-	}
+        int count[] = new int[TOTAL];
+        int output[] = new int[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            count[arr[i]]++;
+        }
+        
+        for(int i=1; i < TOTAL; i++){
+            count[i] += count[i-1];
+        }
+        
+        for(int i=0; i <arr.length; i++){
+            output[count[arr[i]]-1] = arr[i];
+            count[arr[i]]--;
+        }
+        
+        for(int i=0; i < arr.length; i++){
+            arr[i] = output[i];
+        }
+    }
 
-	private static int[] fillOccurancesIntoSortedArray(
-			int[] occurances, int maxNumber, int length) {
-		int sortedNumbers[] = new int[length];
-
-		int sortedNumbersIndex = 0;
-		for (int i = 0; i <= maxNumber; i++) {
-			for (int occurance = 0; occurance < occurances[i]; occurance++) {
-				sortedNumbers[sortedNumbersIndex++] = i;
-			}
-		}
-		return sortedNumbers;
-	}
-
-	public static void main(String[] args) {
-		int[] sortedArray = CountingSort.CountSort(
-				new int[] { 2, 5, 3, 0, 2, 3, 0, 3 }, 5);
-		System.out.println(Arrays.toString(sortedArray));
-	}
+    public static void main(String args[]) {
+        int arr[] = { 6, 1, 6, 7, 3, 1 };
+        CountingSort cs = new CountingSort();
+        cs.sort1(arr);
+        for (int i = 0; i < arr.length; i++) {
+            System.out.println(arr[i]);
+        }
+    }
 }

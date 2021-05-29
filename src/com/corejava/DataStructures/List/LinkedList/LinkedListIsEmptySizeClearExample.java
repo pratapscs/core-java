@@ -2,9 +2,7 @@ package com.corejava.DataStructures.List.LinkedList;
 
 import java.util.LinkedList;
 import java.util.List;
-/**
- * Copyright (c), AnkitMittal JavaMadeSoEasy.com
- */
+
 public class LinkedListIsEmptySizeClearExample 
 {
     public static void main(String args[]) 
